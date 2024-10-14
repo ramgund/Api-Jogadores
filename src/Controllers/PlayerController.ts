@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { playerRepository } from "../repositories/PlayerRepository";
+import { Team } from "../Entities/Teams";
 
 export class PlayerController {
   async createPlayer(req: Request, res: Response) {
@@ -76,7 +77,10 @@ export class PlayerController {
     const idNumber = parseInt(id);
 
     try {
-      const findPlayer = await playerRepository.findOneBy({ id: idNumber });
+      const findPlayer = await playerRepository.find({
+        where: { id: idNumber },
+        relations: ["teams"],
+      });
 
       if (!findPlayer) {
         return res.status(404).json({ Message: "Player não existe" });

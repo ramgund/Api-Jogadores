@@ -19,7 +19,7 @@ export class Player {
   @Column({ type: "char", length: 3 })
   posicao: string;
 
-  @ManyToOne(() => Team, (team) => team.player)
+  @ManyToOne(() => Team, (team) => team.players)
   @JoinColumn({ name: "team_id" })
   teams: Team[];
 }

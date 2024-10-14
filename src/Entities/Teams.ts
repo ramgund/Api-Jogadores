@@ -19,7 +19,6 @@ export class Team {
   @Column({ type: "char", length: 1 })
   serie: string;
 
-  @OneToMany(() => Player, player => player.teams)
-  @JoinColumn({name: 'player_id'})
-  player: Player;
+  @OneToMany(() => Player, (player) => player.teams)
+  players: Player[];
 }
